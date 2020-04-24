@@ -2,66 +2,39 @@
   <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : 'storm'">
     <main>
       <img src="./assets/weather-logo.png"><br>
-<!--      <h1>Weather App</h1><br>-->
+      <h1>Weather App</h1><br>
       <div class="search-box">
         <input type="text" class="search-bar"
                placeholder="Search...."
                v-model="query"
                @keypress="fetchWeather">
       </div>
-
-      <div class="weather-wrap" v-if="typeof  weather.main != 'undefined'">
-        <div class="location-box">
-          <div class="location">{{weather.name}},{{ weather.sys.country}}</div>
-          <div class="date">{{dateBuilder()}}</div>
-        </div>
-      </div>
-
+      <appWeather :weather="weather"></appWeather>
       <div class="weather-box"  v-if="typeof  weather.main != 'undefined'">
         <div class="temp">{{Math.round(weather.main.temp)}}°c</div>
         <div class="weather">{{weather.weather[0].main}}</div>
-
 <!--      Here is the details of the weather of particular area we have entered in the search box-->
-
-        <div >
-          <table id="weather">
-          <tr>
-            <td>Wind</td>
-            <td>{{weather.wind.speed }}m/s,({{weather.wind.deg}})</td>
-          </tr>
-          <tr>
-            <td>Humidity</td>
-            <td>{{weather.main.humidity}} %</td>
-          </tr>
-          <tr>
-            <td>Pressure</td>
-            <td>{{weather.main.pressure}}</td>
-          </tr>
-          <tr>
-            <td>Latitude</td>
-            <td>{{weather.coord.lat}}</td>
-          </tr>
-          <tr>
-            <td>Longitude</td>
-            <td>{{weather.coord.lon}}</td>
-          </tr>
-
-        </table>
-        </div>
+        <appTable :weather="weather"></appTable>
       </div>
-
     </main>
   </div>
 </template>
 <script>
+  import weather from './views/weather-wrap.vue';
+  import table from './views/weatherTable.vue';
 export default {
   name:"app",
+  components:{
+    'appWeather':weather,
+    'appTable':table
+  },
   data() {
     return {
       api_key:'8ed240b208982c104af0fd5b1819fc4d',
       url_base:'https://api.openweathermap.org/data/2.5/',
       query:'',
-      weather:{}
+      weather:{
+      }
     }
   },
   methods:{
@@ -76,21 +49,19 @@ export default {
     },
     setResults(results){
       this.weather = results;
-    },
-      dateBuilder(){
-          let d = new Date();
-          let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-          let day = days[d.getDay()];
-          let date = d.getDate();
-          let month = months[d.getMonth()];
-          let year = d.getFullYear();
-          return `${day} ${date} ${month} ${year}`;
-      }
-}
-
-
+     }}
+    //   dateBuilder(){
+    //       let d = new Date();
+    //       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    //       let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    //
+    //       let day = days[d.getDay()];
+    //       let date = d.getDate();
+    //       let month = months[d.getMonth()];
+    //       let year = d.getFullYear();
+    //       return `${day} ${date} ${month} ${year}`;
+    //   }
+  //}
 }
 </script>
 
@@ -215,12 +186,13 @@ h1{
   position: absolute;
   right: 0px;
   width: 200px;
-  border: 3px solid #white;
+  border: 3px solid;
   padding: 10px;
 }
 img{
   alignment: left;
   height: 50px;
   width: 50px;
+
 }
 </style>
