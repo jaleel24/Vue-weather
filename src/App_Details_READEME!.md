@@ -9,5 +9,5 @@ Learning Outcomes
 - some new stuff in css as well 
 - how to ask for help when you are struggling
 - discord was there to help me 
-- how to fetch the data from api using api key and fetch library , i could also use axios which is quite good as well for bigger projects as it was quite small project that is why i preffered fetch
+- how to fetch the data from api using api key and fetch library , i could also use axios which is quite good as well for bigger projects     as it was quite small project that is why i preffered fetch
 - It is just the beginning and i know i have a long way to go
