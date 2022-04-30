@@ -1,8 +1,8 @@
-#Vue-Weather
+# Vue-Weather
 This is my first ever project in the vue js
 I loved every bit of it
 
-#Learning Outcomes
+# Learning Outcomes
 Cleared concept of Props i mean how do you communicate between the parent component and the children component
 some new stuff in css as well
 how to ask for help when you are struggling
